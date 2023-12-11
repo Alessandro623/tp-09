@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 //DECLARO STRUCTS
 struct
@@ -7,7 +8,7 @@ struct
     int dia;
     int mes;
     int anio;
-}typedef FECHA;
+}typedef Fecha;
 
 struct
 {
@@ -18,38 +19,43 @@ struct
     char area[100];
     char descripcion[100];
     char datosControlador[100];
-    FECHA fechaControl;
+    Fecha fechaControl;
     char estadoControl[20];
 
-}typedef ARTICULO;
+}typedef Articulo;
 
 //DECLARAR FUNCIONES
 
-void cargarDatos(ARTICULO *articulo, int n);
-void mostrarDatos(ARTICULO *articulo,int n);
+void cargarDatos(Articulo *articulo, int n);
+void mostrarDatos(Articulo *articulo,int n);
+void listarArticulosRobotica(Articulo *articulo,int n);
+void articulosControlados(Articulo *articulo, int n);
 //MAIN
 
 int main(){
     int n;
     printf("cuantos articulos desea ingresar= ");
     scanf("%d", &n);
-    ARTICULO *articulo = malloc(sizeof(ARTICULO) * n);
+    Articulo *articulo = malloc(sizeof(Articulo) * n);
     
     cargarDatos(articulo,n);
-    mostrarDatos(articulo,n);
+    printf("\n");
+    listarArticulosRobotica(articulo,n);
+    printf("\n");
+    articulosControlados(articulo,n);
     
     return 0;
 }
 
 //CREACION DE FUNCIONES
 
-void cargarDatos(ARTICULO *articulo, int n){
+void cargarDatos(Articulo *articulo, int n){
     for (int i = 0; i < n; i++)
     {
         fflush(stdin);
         printf("ingrese el nombre del articulo:");
         gets(articulo->nombreArticulo);
-        printf("ingrese el destinatario:");
+        printf("ingrese el destinatario(Alumnos, Docentes, Directivos):");
         gets(articulo->destinatario);
         printf("ingrese el nivel(INICIAL,PRIMARIO,SECUNDARIO,SUPERIOR):");
         gets(articulo->nivel);
@@ -71,7 +77,7 @@ void cargarDatos(ARTICULO *articulo, int n){
     }
 }
 
-void mostrarDatos(ARTICULO *articulo,int n){
+void mostrarDatos(Articulo *articulo,int n){
     for (int i = 0; i < n; i++)
     {
         printf("Nombre Articulo:%s\n", articulo->nombreArticulo);
@@ -82,6 +88,31 @@ void mostrarDatos(ARTICULO *articulo,int n){
         printf("Nombre y Apellido del controlador:%s\n", articulo->datosControlador);
         printf("Fecha del articulo: %d/%d/%d\n", articulo->fechaControl.dia,articulo->fechaControl.mes,articulo->fechaControl.anio);
         printf("estado de control: %s\n", articulo->estadoControl);
+        articulo++;
+    }
+    
+}
+
+void listarArticulosRobotica(Articulo *articulo,int n){
+    for (int i = 0; i < n; i++)
+    {
+        if (strcmp(articulo->area, "Robotica") == 0 && strcmp(articulo->destinatario, "Docentes") == 0)
+        {
+            printf("Nombre del Articulo: %s\n", articulo->nombreArticulo);
+            printf("Area: %s\n", articulo->area); 
+        }
+        articulo++;
+    }
+    
+}
+
+void articulosControlados(Articulo *articulo, int n){
+    for (int i = 0; i < n; i++)
+    {
+        if (strcmp(articulo->estadoControl, "Controlado") == 0)
+        {
+            printf("Nombre de el/los Articulos Controlado: %s\n", articulo->nombreArticulo);
+        }
         articulo++;
     }
     
