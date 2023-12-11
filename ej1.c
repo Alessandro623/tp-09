@@ -1,8 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-/*DECLARACION STRUCTS*/
-
 struct
 {
     char Nombre[100];
@@ -24,33 +20,20 @@ struct
     fecha fecha1;
     int cantVentaMes[11];
     int fechaInicioVenta;
-    char catalogo[];
+    
 } typedef PRODUCTO;
-
-
-/*FUNCIONES*/
 
 PRODUCTO CargarDatos();
 void MostrarDatos(PRODUCTO producto);
 PRODUCTO ModificarPrecio(PRODUCTO producto);
 
-
-/*CODIGO*/
-
 int main(){
-    int n;
-    printf("Ingrese la cantidad de productos= ");
-    scanf("%d", &n);
-    PRODUCTO *CATALOGO = malloc(n*sizeof(PRODUCTO));
-    
     PRODUCTO producto[1];
-
     float montoTotal = 0;
     int mesTopVenta = 0;
-
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < 1; i++)
     {
-        CATALOGO[i]= CargarDatos();
+        producto[i]= CargarDatos();
     }
     for (int i = 0; i < 1; i++)
     {
@@ -73,8 +56,6 @@ int main(){
     return 0;
 }
 
-/*CREACION FUNCIONES*/
-
 PRODUCTO CargarDatos(){
     PRODUCTO producto;
     printf("Ingrese el nombre producto: ");
@@ -82,13 +63,12 @@ PRODUCTO CargarDatos(){
     printf("Ingrese el precio unitario: ");
     scanf("%f", &producto.precioUnitario);
     printf("Ingrese el nombre del Proveedor: ");
-    scanf("%s", &producto.proveedor1.Nombre);
+    scanf("%f", &producto.proveedor1.Nombre);
     fflush(stdin);
-
     printf("Ingrese la cantidad vendida del producto:\n");
     for (int i = 0; i < 12; i++)
     {
-        scanf("%d", &producto.cantVentaMes[i]);
+        scanf("%d", &producto.cantVentaMes);
     }
     printf("Ingrese la fecha de inicio de venta,dia mes anio: ");
     scanf("%d", &producto.fecha1.dia);
